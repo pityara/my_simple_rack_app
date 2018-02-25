@@ -3,6 +3,7 @@ class SurnameController < Controller
     @surnames = Surname.all
   end
   def new
+    @title = "Новая запись"
   end
 
   def create(params)
@@ -12,5 +13,6 @@ class SurnameController < Controller
   def show(id)
     p id
     @surname = Surname.find(id: id.values.first)
+    @title = @surname.title
   end
 end

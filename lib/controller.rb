@@ -11,36 +11,23 @@ class Controller
   end
 
   def call
-    if (method == "GET" && query!={})
-      send(action, query) #invokes method
-      self.status = 200
-      self.headers = { "Content-Type" => "text/html" }
-      self.content = [render_template]
-    elsif method == "GET"
-      send(action) #invokes method
-      self.status = 200
-      self.headers = { "Content-Type" => "text/html" }
-      self.content = [render_template]
-    elsif method == "POST" && body
+    if method == "GET"
+      query.empty? ? send(action) : send(action, query) #invokes method
+      build_response render_template
+    elsif method == "POST"
       send(action, body)
-      self.status = 200
-      self.headers = { "Content-Type" => "text/html" }
-      self.content = ["<meta charset='utf-8'><a href='/'>На главную</a><p>Successfully created!"]
+      redirect_to "/"
     end
     self
   end
 
   def not_found
-    self.status = 404
-    self.headers = {}
-    self.content = ["Not found"]
+    build_response "Page Not Found", status: 404
     self
   end
 
   def internal_error
-    self.status = 500
-    self.headers = {}
-    self.content = ["Internal error"]
+    build_response "Internal error", status: 500
     self
   end
 
@@ -71,6 +58,16 @@ class Controller
     Slim::Template.new(file_path).render(self)
   end
 
+  def build_response(body, status: 200)
+    self.status = status
+    self.headers = { "Content-Type" => "text/html" }
+    self.content = [body]
+  end
 
+  def redirect_to(uri)
+    self.status = 302
+    self.headers = { "Location" => uri }
+    self.content = []
+  end
 
 end

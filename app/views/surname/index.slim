@@ -1,8 +1,6 @@
 == render_partial "_headers.slim"
 body
-  header#header[onmouseover="changeText(true);" onmouseleave="changeText(false);"]
-    h1.header_text[style="padding:70px; color: #fff;"]
-      | Желаешь узнать  достоверные сведения о происхождении своей фамилии? Читай ниже
+  == render_partial "_navbar_top.slim"
   table
     - arr = ["purple", "blue"]
     - @surnames.each do |surname|
@@ -10,6 +8,4 @@ body
         td class="#{arr[rand(2)]}"
           a href="/surname?id=#{surname.id}"
             =surname.title
-  a#link[href="javascript:hideElem('header')"]
-    | Скрыть шапку
   a href='/surnames/new' Новая запись
