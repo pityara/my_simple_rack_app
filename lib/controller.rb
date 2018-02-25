@@ -15,12 +15,12 @@ class Controller
       send(action, query) #invokes method
       self.status = 200
       self.headers = { "Content-Type" => "text/html" }
-      self.content = [template.render(self)]
+      self.content = [render_template]
     elsif method == "GET"
       send(action) #invokes method
       self.status = 200
       self.headers = { "Content-Type" => "text/html" }
-      self.content = [template.render(self)]
+      self.content = [render_template]
     elsif method == "POST" && body
       send(action, body)
       self.status = 200
@@ -44,7 +44,33 @@ class Controller
     self
   end
 
-  def template
-    Slim::Template.new(File.join(App.root, 'app', 'views', "#{self.name}", "#{self.action}.slim"))
+
+  private
+
+  def render_template
+    file_path = File.join(App.root, 'app', 'views', "#{self.name}", "#{self.action}.slim")
+    if File.exists?(file_path)
+      p "Rendering template file #{self.action}.slim"
+      render_slim_file(file_path)
+    else
+      "Error. Template file does not exist"
+    end
   end
+
+  def render_partial(template_file)
+    file_path = File.join(App.root, 'app', 'views', "#{self.name}", template_file)
+    if File.exists?(file_path)
+      p "Rendering partial file #{self.action}.slim"
+      render_slim_file(file_path)
+    else
+      "Error. Template file does not exist"
+    end
+  end
+
+  def render_slim_file(file_path)
+    Slim::Template.new(file_path).render(self)
+  end
+
+
+
 end

@@ -10,5 +10,5 @@ function reduceElem() {
 }
 function changeText(flag) {
   var elem = document.getElementsByClassName("header_text");
-  flag ? elem[0].innerHTML = "Вы навели на шапку сайта!" : elem[0].innerHTML = "Узнай значение своей фамилии!"
+  flag ? elem[0].innerHTML = "Вы навели на шапку сайта!" : elem[0].innerHTML = "Желаешь узнать  достоверные сведения о происхождении своей фамилии? Читай ниже"
 }

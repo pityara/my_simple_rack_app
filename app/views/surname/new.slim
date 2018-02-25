@@ -1,13 +1,13 @@
-meta charset="utf-8"
+==render_partial "_headers.slim"
 a href= "/" Назад
 form method="post" action="/surnames/create"
   p
   b Введите фамилию
   p
-  input size=170 type="text" name="title" placeholder="Введите фамилию"
+  input size=100 type="text" name="title" placeholder="Введите фамилию"
   p
   b Введите описание
   p
-  textarea rows=30 cols=170 type="text" name="content" placeholder="Введите текст"
+  textarea rows=20 cols=100 type="text" name="content" placeholder="Введите текст"
   p
   input type="submit"

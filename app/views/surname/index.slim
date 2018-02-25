@@ -1,26 +1,15 @@
-doctype html
-html
-  head
-    meta[charset="utf-8"]
-    title
-      | ЗНАЧЕНИЕ ФАМИЛИЙ
-    style
-      |  html { background-color: rgb(131,139,139) ; }
-    link[rel="stylesheet" type="text/css" href="assets/style.css"]
-    script[type="text/javascript" src="assets/script.js"]
-    script[type="text/javascript"]
-      |  function hideElem(id) { var elem = document.getElementById(id); var link = document.getElementById('link'); if (elem.style.display == '') { link.innerHTML = "Показать шапку"; elem.style.display = 'none'; } else { link.innerHTML = "Скрыть шапку"; elem.style.display = ''; } }
-  body
-    header#header[onmouseover="changeText(true);" onmouseleave="changeText(false);"]
-      h1.header_text[style="padding:70px; color: #fff;"]
-        | Узнай значение своей фамилии!
-    table
-      - arr = ["purple", "blue"]
-      - @surnames.each do |surname|
-        tr
-          td class="#{arr[rand(2)]}"
-            a href="/surname?id=#{surname.id}"
-              =surname.title
-    a#link[href="javascript:hideElem('header')"]
-      | Скрыть шапку
-    a href='/surnames/new' Новая запись
+== render_partial "_headers.slim"
+body
+  header#header[onmouseover="changeText(true);" onmouseleave="changeText(false);"]
+    h1.header_text[style="padding:70px; color: #fff;"]
+      | Желаешь узнать  достоверные сведения о происхождении своей фамилии? Читай ниже
+  table
+    - arr = ["purple", "blue"]
+    - @surnames.each do |surname|
+      tr
+        td class="#{arr[rand(2)]}"
+          a href="/surname?id=#{surname.id}"
+            =surname.title
+  a#link[href="javascript:hideElem('header')"]
+    | Скрыть шапку
+  a href='/surnames/new' Новая запись
