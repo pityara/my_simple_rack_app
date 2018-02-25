@@ -1,0 +1,5 @@
+"/" : "surname#index"
+"/surnames": "surname#index"
+"/surnames/new": "surname#new"
+"/surnames/create": "surname#create"
+"/surname": "surname#show"
