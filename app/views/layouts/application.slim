@@ -1,9 +1,6 @@
 doctype html
 html
   head
-    meta[charset="utf-8"]
-    title
-      = @title || "ЗНАЧЕНИЕ ФАМИЛИЙ"
     style
       |  html { background-color: rgb(131,139,139) ; }
     link[rel="stylesheet" type="text/css" href="assets/style.css"]
@@ -13,3 +10,9 @@ html
       |  html { background-color: rgb(131,139,139) ; }
     script[type="text/javascript"]
       |  function hideElem(id) { var elem = document.getElementById(id); var link = document.getElementById('link'); if (elem.style.display == '') { link.innerHTML = "Показать шапку"; elem.style.display = 'none'; } else { link.innerHTML = "Скрыть шапку"; elem.style.display = ''; } }
+    meta[charset="utf-8"]
+    title
+      = @title || "ЗНАЧЕНИЕ ФАМИЛИЙ"
+  body
+  	== render_partial "../layouts/_navbar_top.slim"
+  	== yield

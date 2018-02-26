@@ -13,7 +13,7 @@ class Controller
   def call
     if method == "GET"
       query.empty? ? send(action) : send(action, query) #invokes method
-      build_response render_template
+      build_response render
     elsif method == "POST"
       send(action, body)
       redirect_to "/"
@@ -34,11 +34,19 @@ class Controller
 
   private
 
-  def render_template
+
+  def render_with_layout(file_path)
+    layout = Slim::Template.new(File.join(App.root, 'app', 'views', "layouts", "application.slim"))
+    content = Slim::Template.new(file_path).render(self)
+    layout.render(self){ content }
+  end
+
+
+  def render
     file_path = File.join(App.root, 'app', 'views', "#{self.name}", "#{self.action}.slim")
     if File.exists?(file_path)
       p "Rendering template file #{self.action}.slim"
-      render_slim_file(file_path)
+      render_with_layout(file_path)
     else
       "Error. Template file does not exist"
     end
@@ -48,13 +56,13 @@ class Controller
     file_path = File.join(App.root, 'app', 'views', "#{self.name}", template_file)
     if File.exists?(file_path)
       p "Rendering partial file #{self.action}.slim"
-      render_slim_file(file_path)
+      render_without_layout(file_path)
     else
       "Error. Template file does not exist"
     end
   end
 
-  def render_slim_file(file_path)
+  def render_without_layout(file_path)
     Slim::Template.new(file_path).render(self)
   end
 
