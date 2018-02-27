@@ -1,10 +1,12 @@
-  button type="button" class="btn btn-primary" data-toggle="popover" title="Сообщение" data-content="Ура, Bootstrap 4 работает"
-    |Поднеси ко мне курсор
-  table
-    - arr = ["purple", "blue"]
-    - @surnames.each do |surname|
-      tr
-        td class="#{arr[rand(2)]}"
-          a href="/surname?id=#{surname.id}"
-            =surname.title
-  a href='/surnames/new' Новая запись
+.container
+  .col
+  .col 
+	    table
+		    - arr = ["purple", "blue"]
+		    - @surnames.each do |surname|
+		      tr
+		        td class="#{arr[rand(2)]}" style="text-align:center;"
+		          a href="/surname?id=#{surname.id}"
+		            h2 =surname.title
+		a.button.btn.btn-outline-success href='/surnames/new' Новая запись
+  .col

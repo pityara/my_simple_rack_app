@@ -1,12 +1,12 @@
-a href= "/" Назад
-form method="post" action="/surnames/create"
-  p
-  b Введите фамилию
-  p
-  input size=100 type="text" name="title" placeholder="Введите фамилию"
-  p
-  b Введите описание
-  p
-  textarea rows=20 cols=100 type="text" name="content" placeholder="Введите текст"
-  p
-  input type="submit"
+.container
+  .col
+  .col
+    form method="post" action="/surnames/create"
+      .form-group
+        label for="titleInput" Фамилия
+        input.form-control.mx-sm-3 id="titleInput" size=100 type="text" name="title" placeholder="Введите фамилию"
+      .form-group
+        label for="textInput" Описание
+        textarea.form-control.mx-sm-3 id="textInput" rows=20 cols=100 type="text" name="content" placeholder="Введите текст"
+      button.button.btn.btn-outline-primary type="submit" Подтвердить
+  .col

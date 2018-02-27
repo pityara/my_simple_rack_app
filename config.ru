@@ -11,14 +11,19 @@ assets.append_path(File.join(project_root, 'app', 'assets'))
 assets.append_path(File.join(project_root, 'app', 'assets', 'javascripts'))
 assets.append_path(File.join(project_root, 'app', 'assets', 'stylesheets'))
 assets.append_path(File.join(project_root, 'app', 'assets', 'images'))
+Bundler.require
+
+require "./app"
 
 map "/assets" do
   run assets
 end
 
+map '/' do
+	run App.new 
+end
 
-Bundler.require
 
-require "./app"
 
-run App.new
+
+
