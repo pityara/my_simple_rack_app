@@ -15,8 +15,11 @@ class Controller
       query.empty? ? send(action) : send(action, query) #invokes method
       build_response render
     elsif method == "POST"
-      send(action, body)
-      redirect_to "/"
+      if response = send(action, body)
+        build_post_response response
+      else
+        redirect_to "/"
+      end
     end
     self
   end
@@ -35,8 +38,13 @@ class Controller
   private
 
 
+  def build_post_response(body, status: 200)
+    self.status = status
+    self.headers = { "Content-Type" => "text/html" }
+    self.content = [body]
+  end
+
   def render_with_layout(file_path)
-    layout = Slim::Template.new(File.join(App.root, 'app', 'views', "layouts", "application.slim"))
     content = Slim::Template.new(file_path).render(self)
     layout.render(self){ content }
   end

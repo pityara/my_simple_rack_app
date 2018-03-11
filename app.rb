@@ -2,7 +2,6 @@ require 'yaml'
 require "./lib/boot"
 require "./lib/router"
 
-
 class App
   def self.root
     File.dirname(__FILE__)

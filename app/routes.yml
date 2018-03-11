@@ -3,3 +3,4 @@
 "/surnames/new": "surname#new"
 "/surnames/create": "surname#create"
 "/surname": "surname#show"
+"/comment/create": "comment#create"

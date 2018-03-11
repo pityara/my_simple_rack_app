@@ -5,3 +5,18 @@
     h1.display-4 = @surname.title
     p.lead = @surname.content
   .col
+  form
+      input name="surname_id" type="hidden" value=@surname.id
+      .form-group
+        label for="titleInput" Автор
+        input.form-control.mx-sm-3 id="titleInput" size=20 type="text" name="author" placeholder="Введите ваше имя"
+      .form-group
+        label for="textInput" Комментарий
+        textarea.form-control.mx-sm-3 id="textInput" rows=2 cols=20 type="text" name="text" placeholder="Введите текст"
+      #new_comment.button.button.btn.btn-outline-primary type="submit" Подтвердить
+  .comments
+    -@comments.each do |comment|
+      .v_comment
+        b =comment.author
+        | :
+        =comment.text
